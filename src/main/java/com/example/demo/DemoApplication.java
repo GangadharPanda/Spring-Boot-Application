@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +17,13 @@ public class DemoApplication {
 	}
 
 	@GetMapping("/hello")
-	public String sayHello() {
-		return "Hello this is my first Rest API using Spring boot";
+	public List<String> sayHello() {
+
+		List<String> as = new ArrayList<>();
+		as.add("Hi");
+		as.add("Hello");
+		as.add("How are you");
+		return as;
 	}
 
 }
