@@ -2,10 +2,19 @@ package com.example.demo.modal;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order {
-	Integer orderId;
-	Double amountDouble;
+	private Integer orderId;
+	private Double amountDouble;
+	private String xValue;
+	
+
+	public String getxValue() {
+		return xValue;
+	}
+
+	public void setxValue(String xValue) {
+		this.xValue = xValue;
+	}
 
 	public Integer getOrderId() {
 		return orderId;

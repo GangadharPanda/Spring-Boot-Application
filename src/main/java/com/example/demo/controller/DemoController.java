@@ -15,13 +15,13 @@ public class DemoController {
 
 	@GetMapping("/orders")
 	public List<Order> getOrders() {
-		Order order1 = new Order(1, 1000d);
-		Order order2 = new Order(2, 2000d);
-		Order order3 = new Order(3, 3000d);
+		Order order1 = new Order(1, 100d);
+		Order order2 = new Order(2, 200d);
+		Order order3 = new Order(3, 300d);
 		Order order4 = new Order(4, 4000d);
-		Order order5 = new Order(5, 5000d);
-		Order order6 = new Order(6, 6000d);
-		Order order7 = new Order(7, 7000d);
+		Order order5 = new Order(5, 500d);
+		Order order6 = new Order(6, 600d);
+		Order order7 = new Order(7, 700d);
 		List<Order> orders = new ArrayList<Order>();
 		orders.add(order1);
 		orders.add(order2);
