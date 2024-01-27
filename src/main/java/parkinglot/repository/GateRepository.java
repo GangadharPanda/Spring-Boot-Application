@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import parkinglot.models.Gate;
+import parkinglot.models.Vehicle;
 
 public class GateRepository {
 
@@ -15,6 +16,10 @@ public class GateRepository {
 			return Optional.of(gates.get(id));
 		}
 		return Optional.empty();
+	}
+
+	public void save(Long id, Gate gate) {
+		gates.put(id, gate);
 	}
 
 }

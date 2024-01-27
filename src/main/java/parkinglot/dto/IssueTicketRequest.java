@@ -1,5 +1,15 @@
 package parkinglot.dto;
 
-public class IssueTicketRequest {
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import parkinglot.models.VehicleType;
 
+@Getter
+@Setter
+@Builder
+public class IssueTicketRequest {
+	private String vehicleNumber;
+	private long gateId;
+	private VehicleType vehicleType;
 }

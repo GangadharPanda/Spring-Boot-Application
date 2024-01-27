@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ParkingSpot {
 	
-	private int slotNumber;
+	private int spotNumber;
 	private ParkingFloor parkingfloor;
 	private ParkingSpotStatus parkingSpotStatus;
 	private VehicleType allowedVehicleTypes;
