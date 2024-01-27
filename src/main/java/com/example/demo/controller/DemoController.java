@@ -22,6 +22,7 @@ public class DemoController {
 		Order order5 = new Order(5, 500d);
 		Order order6 = new Order(6, 600d);
 		Order order7 = new Order(7, 700d);
+		
 		List<Order> orders = new ArrayList<Order>();
 		orders.add(order1);
 		orders.add(order2);

@@ -14,7 +14,9 @@
 8. Download Eclipse for JAVA EE Developer(I was facing this error <b>"This compilation unit is not on the build path of a Java project."</b> because I was using non Java EE Eclipse).
 9. Unzip downloaded project and import existing maven project.
 10. Select this project(not the main class) and <b>Run As Java Application</b>.
+11. Go to Lombok repository C:\Users\USER\.m2\repository\org\projectlombok and run java -jar lombok-1.16.18.jar in command line
 11. It should be all set now.
+
 
 ---
 ## How to define the first rest API?
