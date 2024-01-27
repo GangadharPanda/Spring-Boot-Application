@@ -12,9 +12,9 @@ import lombok.Setter;
 public class IssueTicketResponse {
 
 	private String ticketNumber;
-	private int floorNumber;
-	private int slotNumber;
-	private int gateNumber;
+	private long floorNumber;
+	private long slotNumber;
+	private long gateNumber;
 	private Date entryTime;
 	private String vehicleNumber;
 }
