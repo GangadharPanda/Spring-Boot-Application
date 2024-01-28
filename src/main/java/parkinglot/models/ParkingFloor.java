@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class ParkingFloor {
 
-	private int floorNumber;
+	private long floorNumber;
 	private List<ParkingSpot> parkingSpots;
 }

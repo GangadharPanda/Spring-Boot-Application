@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import parkinglot.models.Gate;
 import parkinglot.models.ParkingLot;
 
 public class ParkingLotRepository {
@@ -15,6 +16,10 @@ public class ParkingLotRepository {
 			return Optional.of(parkingLots.get(id));
 		}
 		return Optional.empty();
+	}
+
+	public void save(Long id, ParkingLot parkingLot) {
+		parkingLots.put(id, parkingLot);
 	}
 
 }

@@ -3,6 +3,7 @@ package parkinglot.controller;
 import parkinglot.dto.IssueTicketRequest;
 import parkinglot.dto.IssueTicketResponse;
 import parkinglot.exceptions.GateNotFoundException;
+import parkinglot.exceptions.ParkingSpotNotFoundException;
 import parkinglot.models.Ticket;
 import parkinglot.service.TicketService;
 
@@ -21,11 +22,14 @@ public class TicketController {
 					request.getGateId());
 		} catch (GateNotFoundException e) {
 			throw new RuntimeException("Invalid gate");
+		} catch (ParkingSpotNotFoundException e) {
+			throw new RuntimeException("No Spot is available for this kind of vehicle");
 		}
 
 		return IssueTicketResponse.builder().ticketNumber(ticket.getTicketNumber())
-				.floorNumber(ticket.getParkingSpot().getSpotNumber()).entryTime(ticket.getEntryTime())
-				.vehicleNumber(ticket.getVehicle().getVehicleNumber())
+				.spotNumber(ticket.getParkingSpot().getSpotNumber()).entryTime(ticket.getEntryTime())
+				.floorNumber(ticket.getParkingSpot().getParkingFloor().getFloorNumber())
+				.vehicleNumber(ticket.getVehicle().getVehicleNumber()).generatedBy(ticket.getGeneratedBy())
 				.gateNumber(ticket.getGeneratedAt().getGateNumber()).build();
 	}
 }

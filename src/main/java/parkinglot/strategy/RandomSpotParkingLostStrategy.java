@@ -18,7 +18,7 @@ public class RandomSpotParkingLostStrategy implements SpotAssignmentStrategy {
 
 	@Override
 	public ParkingSpot getSpot(Long parkingSpotId, Gate gate, VehicleType vehicletype) {
-		// Get all the avilable parking Spots
+		// Get all the available parking Spots
 		ParkingLot lot = lotRepository.findParkingLotById(1L).get();
 
 		for (ParkingFloor floor : lot.getParkingFloors()) {

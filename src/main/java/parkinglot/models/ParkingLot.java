@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ParkingLot {
-	private int id;
+	private long id;
 	private String name;
 	private String address;
 	List<ParkingFloor> parkingFloors;

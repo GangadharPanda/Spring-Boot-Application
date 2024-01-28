@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import parkinglot.exceptions.GateNotFoundException;
+import parkinglot.exceptions.ParkingSpotNotFoundException;
 import parkinglot.models.Gate;
 import parkinglot.models.ParkingSpot;
 import parkinglot.models.ParkingSpotStatus;
@@ -35,7 +36,7 @@ public class TicketService {
 	}
 
 	public Ticket issueTicket(String vehicleNumber, VehicleType vehicleType, long gateNumber)
-			throws GateNotFoundException {
+			throws GateNotFoundException, ParkingSpotNotFoundException {
 		// Create a Ticket Object
 		Ticket ticket = new Ticket();
 
@@ -71,6 +72,9 @@ public class TicketService {
 
 		// Find Parking Spot
 		ParkingSpot spot = strategy.getSpot(1L, gate, vehicleType);
+		if (spot == null) {
+			throw new ParkingSpotNotFoundException("No parking Spot available.");
+		}
 		spot.setVehicle(savedVehicle);
 		spot.setParkingSpotStatus(ParkingSpotStatus.OCCUPIED);
 
