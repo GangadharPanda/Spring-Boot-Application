@@ -9,7 +9,7 @@
    a. Spring Web
    b. Lombok
    c. Spring Configuration Processor
-7. Generate
+8. Generate
 ---
 8. Download Eclipse for JAVA EE Developer(I was facing this error <b>"This compilation unit is not on the build path of a Java project."</b> because I was using non Java EE Eclipse).
 9. Unzip downloaded project and import existing maven project.
