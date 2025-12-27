@@ -1,8 +1,8 @@
-package com.example.demo.prep;
+package com.example.demo.prep.singleDB;
 
 import com.example.demo.modal.UserDTO;
-import com.example.demo.prep.primarydb.entities.User;
-import com.example.demo.prep.primarydb.repositories.UserRepository;
+import com.example.demo.prep.singleDB.primarydb.entities.User;
+import com.example.demo.prep.singleDB.primarydb.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +29,4 @@ public class UserService {
         }
         return results;
     }
-
-
 }

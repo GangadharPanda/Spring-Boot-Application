@@ -1,4 +1,4 @@
-package com.example.demo.prep.primarydb.entities;
+package com.example.demo.prep.singleDB.primarydb.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
