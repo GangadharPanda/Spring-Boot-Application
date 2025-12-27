@@ -21,9 +21,7 @@ public class MultiDbPocService {
 
         // 1. Insert into MySQL
         if (userRepository != null) {
-            MySqlUser mysqlUser = new MySqlUser();
-            mysqlUser.setId(101L);
-            mysqlUser.setName("Gemini_User");
+            MySqlUser mysqlUser = new MySqlUser(101L,"Gemini_User");
             userRepository.save(mysqlUser);
             System.out.println("✅ Data saved to MySQL (Primary)");
         }

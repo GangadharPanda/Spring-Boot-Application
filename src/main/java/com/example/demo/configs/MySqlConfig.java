@@ -51,4 +51,13 @@ public class MySqlConfig {
             @Qualifier("mysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
+
+    @Bean(name = "chainedTransactionManager")
+    public PlatformTransactionManager chainedTransactionManager(
+            @Qualifier("mysqlTransactionManager") PlatformTransactionManager mysqlTM,
+            @Qualifier("h2TransactionManager") PlatformTransactionManager h2TM) {
+
+        // This allows Spring to coordinate both managers
+        return new org.springframework.data.transaction.ChainedTransactionManager(mysqlTM, h2TM);
+    }
 }

@@ -3,7 +3,9 @@ package com.example.demo.prep.multipleDB.mysqlDB.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -20,9 +22,13 @@ import lombok.Setter;
 @Table(name = "secondary_user", catalog = "secondary_db")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MySqlUser {
 
     @Id
     private Long id;
     private String name;
+
+
 }

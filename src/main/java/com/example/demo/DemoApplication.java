@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.prep.multipleDB.BrokenMultiDbService;
 import com.example.demo.prep.multipleDB.MultiDbPocService;
+import com.example.demo.prep.multipleDB.h2DB.entities.UserDetail;
 import com.example.demo.prep.multipleDB.h2DB.repositories.UserDetailRepository;
+import com.example.demo.prep.multipleDB.mysqlDB.entities.MySqlUser;
 import com.example.demo.prep.multipleDB.mysqlDB.repositories.MySqlUserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -99,6 +102,59 @@ public class DemoApplication {
             );
 
             System.out.println("--- 🔍 VALIDATION COMPLETE ---\n");
+        };
+    }
+
+    @Bean
+    @Order(4)
+    public CommandLineRunner runBrokenPoc(BrokenMultiDbService brokenService) {
+        return args -> {
+            try {
+                MySqlUser user = new MySqlUser(202L, "Unlucky_User");
+                UserDetail detail = new UserDetail(202L, "This should never exist", "GUEST");
+
+                brokenService.saveWithFailure(user, detail);
+            } catch (Exception e) {
+                System.err.println("Caught Expected Error: " + e.getMessage());
+            }
+        };
+    }
+
+    @Bean
+    @Order(5)
+    public CommandLineRunner runChainedPoc(
+            BrokenMultiDbService multiDbService,
+            MySqlUserRepository mysqlRepo,
+            UserDetailRepository h2Repo) {
+
+        return args -> {
+            System.out.println("\n=== 🧪 STARTING CHAINED TRANSACTION POC 🧪 ===");
+
+            Long testId = 999L;
+            MySqlUser user = new MySqlUser(testId, "Chained_User");
+            UserDetail detail = new UserDetail(testId, "This should be rolled back", "POC");
+
+            try {
+                System.out.println("Attempting to save to both DBs (Expect Failure)...");
+                multiDbService.saveTogether(user, detail);
+            } catch (Exception e) {
+                System.err.println("✅ Caught expected exception: " + e.getMessage());
+            }
+
+            // --- VERIFICATION ---
+            System.out.println("\n--- 🕵️ POST-FAILURE INSPECTION 🕵️ ---");
+
+            boolean mysqlExists = mysqlRepo.existsById(testId);
+            boolean h2Exists = h2Repo.findByUserId(testId).isPresent();
+
+            if (!mysqlExists && !h2Exists) {
+                System.out.println("🏆 SUCCESS: Both databases are EMPTY. The Chained Rollback worked!");
+            } else {
+                System.out.println("❌ FAILURE: Data inconsistency found!");
+                if (mysqlExists) System.out.println("   -> [!!!] Record still exists in MySQL");
+                if (h2Exists) System.out.println("   -> [!!!] Record still exists in H2");
+            }
+            System.out.println("==============================================\n");
         };
     }
 }
