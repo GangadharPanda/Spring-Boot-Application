@@ -3,6 +3,7 @@ package com.example.demo.prep.singleDB;
 import com.example.demo.modal.UserDTO;
 import com.example.demo.prep.singleDB.primarydb.entities.User;
 import com.example.demo.prep.singleDB.primarydb.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,11 +12,8 @@ import java.util.List;
 @Service
 public class UserService {
 
-    final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired(required = false)
+    UserRepository userRepository;
 
     public List<UserDTO> getAllPrimaryUser() {
         return toDTOs(userRepository.findAll());
