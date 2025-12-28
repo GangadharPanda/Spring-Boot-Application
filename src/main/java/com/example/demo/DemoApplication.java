@@ -41,9 +41,7 @@ public class DemoApplication {
 
     @Order(1)
     @Bean
-    public CommandLineRunner connectionCheck(
-            @Qualifier("mysqlDataSource") DataSource mysqlDataSource,
-            @Qualifier("h2DataSource") DataSource h2DataSource) {
+    public CommandLineRunner connectionCheck(@Qualifier("mysqlDataSource") DataSource mysqlDataSource, @Qualifier("h2DataSource") DataSource h2DataSource) {
 
         return args -> {
             System.out.println("\n--- 🛡️ Starting Multi-DB Connection Check ---");
@@ -80,26 +78,18 @@ public class DemoApplication {
 
     @Bean
     @Order(3) // Ensures this runs AFTER the insert runner
-    public CommandLineRunner validateData(
-            MySqlUserRepository mysqlRepo,
-            UserDetailRepository h2Repo) {
+    public CommandLineRunner validateData(MySqlUserRepository mysqlRepo, UserDetailRepository h2Repo) {
 
         return args -> {
             System.out.println("\n--- 🔍 VALIDATING DATA IN BOTH DATABASES ---");
 
             // Validate MySQL
             System.out.println("Checking MySQL (Primary DB)...");
-            mysqlRepo.findAll().forEach(user ->
-                    System.out.println("   [MySQL] Found User: ID=" + user.getId() + ", Name=" + user.getName())
-            );
+            mysqlRepo.findAll().forEach(user -> System.out.println("   [MySQL] Found User: ID=" + user.getId() + ", Name=" + user.getName()));
 
             // Validate H2
             System.out.println("Checking H2 (Secondary DB)...");
-            h2Repo.findAll().forEach(detail ->
-                    System.out.println("   [H2] Found Detail: ID=" + detail.getDetailId() +
-                            ", For UserID=" + detail.getUserId() +
-                            ", Bio=" + detail.getBio())
-            );
+            h2Repo.findAll().forEach(detail -> System.out.println("   [H2] Found Detail: ID=" + detail.getDetailId() + ", For UserID=" + detail.getUserId() + ", Bio=" + detail.getBio()));
 
             System.out.println("--- 🔍 VALIDATION COMPLETE ---\n");
         };
@@ -122,10 +112,7 @@ public class DemoApplication {
 
     @Bean
     @Order(5)
-    public CommandLineRunner runChainedPoc(
-            BrokenMultiDbService multiDbService,
-            MySqlUserRepository mysqlRepo,
-            UserDetailRepository h2Repo) {
+    public CommandLineRunner runChainedPoc(BrokenMultiDbService multiDbService, MySqlUserRepository mysqlRepo, UserDetailRepository h2Repo) {
 
         return args -> {
             System.out.println("\n=== 🧪 STARTING CHAINED TRANSACTION POC 🧪 ===");
